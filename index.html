@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberparty Invitasjon</title> <!-- tittelen på fanen i nettleseren -->
+  <link rel="stylesheet" href="styling-index.css"> <!-- kobler til CSS-filen -->
+</head>
+<body>
+
+  <!-- hovedcontainer for invitasjonen -->
+  <div class="container">
+    <h1>INVITASJON</h1> <!-- stor overskrift med animasjon -->
+    
+    <!-- skjult checkbox som brukes til å åpne døra -->
+    <input type="checkbox" id="door-trigger">
+    
+    <!-- label gjør at vi kan klikke på døra -->
+    <label for="door-trigger" class="door-wrapper">
+      <div class="door"> <!-- selve døra -->
+          <div class="door-open-text">ÅPNE MEG</div> <!-- tekst over håndtak -->
+        <div class="door-handle"></div> <!-- håndtaket -->
+        <div class="door-sign">CYBERPARTY</div> <!-- skilt på døra -->
+      </div>
+      <div class="door-bg"></div> <!-- lysglød bak døra -->
+    </label>
+
+    <!-- knapp som dukker opp når døra åpnes -->
+    <a href="main.html" class="door-button">PRESS FOR PARTY</a>
+  </div>
+
+</body>
+</html>

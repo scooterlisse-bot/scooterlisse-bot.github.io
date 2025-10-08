@@ -1,0 +1,258 @@
+body {
+    background-image: url('bilder/ezgif.com-speed.gif'); /* bakgrunn på hele nettsiden */
+}
+
+.container {
+  height: 768px;
+  width: 1024px;
+  border: 5px solid black;
+  background-image: url('bilder/dansegulv.gif'); /* kilde for gif: https://iconscout.com/lottie-animation/80s-dancefloor-animation_9024259 */
+  background-size: cover;       /* gjør at bildet dekker hele containeren */
+  background-repeat: no-repeat; /* hindrer at det repeteres */
+  background-position: center;  /* sentrerer bildet */
+  position: relative;
+  display: flex;  /* flexbox brukt i container */
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  animation: strobe 0.5s infinite; /* blinker i ulike farger */
+  overflow: hidden;
+}
+
+@keyframes strobe {
+  0%   { background-color: #a020f0; }
+  25%  { background-color: #b266ff; }
+  50%  { background-color: #c299fc; }
+  75%  { background-color: #b266ff; }
+  100% { background-color: #a020f0; }
+}
+
+/* Mann som danser og senere blir slått ut */
+.dancer-male {
+  position: absolute;
+  bottom: 155px;
+  left: 60%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 600px;
+  background: url("bilder/mannsomdanser.gif") no-repeat center/contain;
+  background-size: contain;
+  z-index: 5;
+
+  /* Hele sekvensen */
+  animation: move-to-lady 8s ease-in-out forwards, man-dance 2s infinite 8s, fly-away 2s ease-in 13s forwards;
+}
+
+/* Dame som danser */
+.dancer {
+  position: absolute;
+  bottom: 0;                         
+  left: 60px;                        
+  width: 720px;                      
+  height: 950px;
+  background: url("bilder/damesomdanser.gif") no-repeat center/contain; /*kilde for gif: https://giphy.com/stickers/ShuffleShowcase-dance-workout-move-WQKYAKL7BxGkTXueNE /*
+  background-size: contain;
+
+  /* Hun danser (selve bildet får en bevegelse) */
+  animation: dance-loop 1s infinite;
+}
+
+/* Evig dans i normal størrelse */
+@keyframes dance-loop {
+  0%   { transform: scale(1) rotate(0deg); }
+  25%  { transform: scale(1) rotate(-5deg); }
+  50%  { transform: scale(1) rotate(0deg); }
+  75%  { transform: scale(1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Mann går bort til damen */
+@keyframes move-to-lady {
+  0%   { left: 80%; }
+  100% { left: 35%; }
+}
+
+/* Etter han har kommet fram: danser */
+@keyframes man-dance {
+  0%, 100% { transform: translateX(-50%) rotate(0deg) scale(1); }
+  50%      { transform: translateX(-50%) rotate(-5deg) scale(1.05); }
+}
+
+/* Blir klappet til og flyr ut av bildet */
+@keyframes fly-away {
+  0%   { transform: translateX(-50%) rotate(0deg) scale(1); opacity: 1; }
+  20%  { transform: translateX(-50%) rotate(-20deg) scale(1.1) translateX(-20px); }
+  40%  { transform: translateX(-50%) rotate(15deg) scale(0.9) translateX(50px) translateY(-20px); }
+  70%  { transform: translateX(-50%) rotate(45deg) scale(0.8) translateX(200px) translateY(-200px); }
+  100% { transform: translateX(-50%) rotate(90deg) scale(0.6) translateX(600px) translateY(-600px); opacity: 0; }
+}
+
+.disco-glow {
+  position: absolute;
+  top: 52px;       /* juster vertikal plassering */
+  right: 511px;    /* juster horisontal plassering */
+  width: 120px;    /* diameter på glow */
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(255, 0, 200, 0.5) 40%, 
+    rgba(200, 0, 200, 0.2) 70%, 
+    rgba(0, 0, 0, 0) 90%);
+  
+  /* kraftig glow */
+  box-shadow: 
+    0 0 30px rgba(255, 0, 200, 0.9),
+    0 0 60px rgba(255, 0, 200, 0.7),
+    0 0 90px rgba(0, 255, 200, 0.6),
+    0 0 120px rgba(0, 200, 255, 0.5);
+
+  animation: glowPulse 2s infinite alternate;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes glowPulse {
+  from { transform: scale(0.7); opacity: 0.85; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+
+/* Snakkeboble */
+.speech-bubble {
+  position: absolute;
+  bottom: 670px;
+  left: 22%;
+  padding: 15px 20px;
+  max-width: 220px;
+
+  background: #ff4de6;
+  color: #111;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 2px solid #ff4de6;
+  box-shadow: 0 0 15px #ff4de6, 0 0 30px #ff4de6, 0 0 45px #ff4de6;
+  text-align: center;
+
+  opacity: 0;
+  z-index: 20;
+
+  animation: bubble-in-out 6s ease forwards;
+  animation-delay: 9s;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 40px;
+  border-width: 20px 20px 0;
+  border-style: solid;
+  border-color: #ff4de6 transparent transparent transparent; /* rosa pil */
+  filter: drop-shadow(0 0 5px #ff4de6);
+}
+
+@keyframes bubble-in-out {
+  0%   { opacity: 0; transform: scale(0.5); }
+  20%  { opacity: 1; transform: scale(1); }
+  70%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.5); }
+}
+
+/* Boom-effekten */
+.boom {
+  position: absolute;
+  bottom: 340px; /* ca. høyde rett ved hodet til mannen */
+  left: 28%;
+  width: 200px;
+  height: 200px;
+  background: url("bilder/slap.gif") no-repeat center/contain; /* kilde for gif: https://giphy.com/stickers/psychedelic-hand-slap-4ZMlgAI13aRIaAliYH */
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+
+  animation: boom-effect 1s steps(6) 13s forwards;
+}
+
+/* Boom-animasjon */
+@keyframes boom-effect {
+  0%   { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  20%  { opacity: 1; transform: scale(1.2) rotate(-10deg); }
+  50%  { opacity: 1; transform: scale(1.4) rotate(10deg); }
+  80%  { opacity: 1; transform: scale(1.2) rotate(-5deg); }
+  100% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+}
+
+/* Publikum */
+.crowd {
+  position: absolute;
+  bottom: -300px; /* start utenfor synsfeltet */
+  left: 0;
+  width: 100%;
+  height: 300px; /* høyde på publikum, justert etter gif */
+  background: url("bilder/dancingcrowd.gif") no-repeat center bottom; /* kilde for gif: https://giphy.com/stickers/bakermat-dog-party-partystarter-ckTcwJkfuTlivOsLLI */
+  background-size: cover;
+  z-index: 3; /* under danserne men over gulvet */
+
+  /* animasjon: etter 16s glir de opp */
+  animation: crowd-rise 5s ease-out forwards;
+  animation-delay: 16s;
+  opacity: 0;
+}
+
+@keyframes crowd-rise {
+  0%   { bottom: -300px; opacity: 0; }
+  100% { bottom: 0;      opacity: 1; }
+}
+
+/* Flex-container for klonene */
+.dancer-clones {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* plasserer dem på rekke i midten */
+  gap: 40px;                 /* mellomrom mellom klonene */
+  z-index: 10;
+}
+
+/* Kloner – ekstra dansere */
+.dancer-clone {
+  position: absolute;
+  bottom: 0;
+  width: 720px;
+  height: 950px;
+  background: url("bilder/damesomdanser.gif") no-repeat center/contain;
+  background-size: contain;
+  transform-origin: center bottom;
+  opacity: 0;
+  z-index: 10;
+
+  /* To animasjoner: 
+     1) de glir inn (clone-enter) 
+     2) de danser evig (dance-loop) */
+  animation: dance-loop 1s infinite, clone-enter 2s ease-out forwards;
+  animation-delay: 21s, 21s; /* starter etter publikum */
+}
+
+/* Plassering for hver klone */
+.clone1 { left: 300px; }
+.clone2 { left: 540px; }
+.clone3 { left: 780px; }
+
+/* Glid-inn animasjon */
+@keyframes clone-enter {
+  0%   { opacity: 0; transform: translateY(100px) scale(1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Evig dans */
+@keyframes dance-loop {
+  0%   { transform: scale(1) rotate(0deg); }
+  25%  { transform: scale(1) rotate(-5deg); }
+  50%  { transform: scale(1) rotate(0deg); }
+  75%  { transform: scale(1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
